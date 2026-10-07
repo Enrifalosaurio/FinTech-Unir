@@ -93,3 +93,14 @@ app/
    ```
 
 Los nuevos endpoints aparecerán automáticamente en `/docs`.
+
+## Modelo de Datos: 
+
+### Usuario (`User`)
+
+| Atributo | Tipo | Primaria | Único | Descripción / Por defecto |
+| :--- | :--- | :---: | :---: | :--- |
+| `id` | `UUID` | Sí | Sí | Identificador único del usuario (generado automáticamente mediante `uuid4`). |
+| `username` | `str` | No | Sí | Nombre de usuario único para autenticación/identificación. |
+| `email` | `str` | No | Sí | Correo electrónico único del usuario. |
+| `password` | `str` | No | No | Contraseña del usuario (hash). |
