@@ -93,3 +93,5 @@ app/
    ```
 
 Los nuevos endpoints aparecerán automáticamente en `/docs`.
+
+Actualización del readme para la Actividad grupal: pull requests en GitHub de la asignatura Entornos de Integración y Entrega Continua.
