@@ -62,7 +62,6 @@ def delete_user(user_id: UUID, session: Session = Depends(get_session)):
     user = session.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
     session.delete(user)
     session.commit()
-    return None
+    return user
