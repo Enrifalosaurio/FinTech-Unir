@@ -22,6 +22,25 @@ uv run fastapi dev
 
 La base de datos `database.db` se crea automáticamente en la raíz del proyecto al arrancar la aplicación.
 
+## Ejecutar con Docker
+
+Requiere tener [Docker](https://docs.docker.com/get-docker/) instalado.
+
+```bash
+# Construir la imagen
+docker build -t fintech-unir .
+
+# Lanzar el contenedor
+docker run -p 8000:8000 fintech-unir
+```
+
+- API: http://127.0.0.1:8000
+- Documentación interactiva: http://127.0.0.1:8000/docs
+
+Para detenerlo, pulsa `Ctrl+C`. Si prefieres lanzarlo en segundo plano, usa `docker run -d -p 8000:8000 --name fintech-unir fintech-unir` y detenlo con `docker stop fintech-unir`.
+
+> La base de datos `database.db` se crea dentro del contenedor, por lo que sus datos se pierden al eliminarlo.
+
 ## Estructura
 
 ```
