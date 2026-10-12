@@ -22,6 +22,25 @@ uv run fastapi dev
 
 La base de datos `database.db` se crea automáticamente en la raíz del proyecto al arrancar la aplicación.
 
+## Ejecutar con Docker
+
+Requiere tener [Docker](https://docs.docker.com/get-docker/) instalado.
+
+```bash
+# Construir la imagen
+docker build -t fintech-unir .
+
+# Lanzar el contenedor
+docker run -p 8000:8000 fintech-unir
+```
+
+- API: http://127.0.0.1:8000
+- Documentación interactiva: http://127.0.0.1:8000/docs
+
+Para detenerlo, pulsa `Ctrl+C`. Si prefieres lanzarlo en segundo plano, usa `docker run -d -p 8000:8000 --name fintech-unir fintech-unir` y detenlo con `docker stop fintech-unir`.
+
+> La base de datos `database.db` se crea dentro del contenedor, por lo que sus datos se pierden al eliminarlo.
+
 ## Estructura
 
 ```
@@ -95,3 +114,13 @@ app/
 Los nuevos endpoints aparecerán automáticamente en `/docs`.
 
 Actualización del readme para la Actividad grupal: pull requests en GitHub de la asignatura Entornos de Integración y Entrega Continua.
+## Modelo de Datos: 
+
+### Usuario (`User`)
+
+| Atributo | Tipo | Primaria | Único | Descripción / Por defecto |
+| :--- | :--- | :---: | :---: | :--- |
+| `id` | `UUID` | Sí | Sí | Identificador único del usuario (generado automáticamente mediante `uuid4`). |
+| `username` | `str` | No | Sí | Nombre de usuario único para autenticación/identificación. |
+| `email` | `str` | No | Sí | Correo electrónico único del usuario. |
+| `password` | `str` | No | No | Contraseña del usuario (hash). |

@@ -37,3 +37,31 @@ def create_user(user_in: UserCreate, session: Session = Depends(get_session)):
         raise HTTPException(status_code=409, detail="Username or email already exists")
     session.refresh(user)
     return user
+
+@router.put("/{user_id}", response_model=UserPublic)
+def update_user(user_id: UUID, user_in: UserCreate, session: Session = Depends(get_session)):
+    user = session.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    user_data = user_in.model_dump()
+    user.sqlmodel_update(user_data)
+
+    session.add(user)
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(status_code=409, detail="Username or email already exists")
+
+    session.refresh(user)
+    return user
+
+@router.delete("/{user_id}", status_code=200)
+def delete_user(user_id: UUID, session: Session = Depends(get_session)):
+    user = session.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    session.delete(user)
+    session.commit()
+    return user
